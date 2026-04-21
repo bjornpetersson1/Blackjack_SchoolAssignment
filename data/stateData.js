@@ -10,7 +10,7 @@ export const gameState = {
   ],
   dealerHand: {
     cards: [],
-    values: 0,
+    value: 0,
     done: false,
   },
   deckState: [],
