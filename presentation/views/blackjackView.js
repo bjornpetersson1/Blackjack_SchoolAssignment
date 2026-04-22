@@ -12,11 +12,6 @@ export const initBlackjackView = () => {
     .addEventListener("click", () => {
       newCardDrawRenderComp("player", 0);
     });
-  document
-    .querySelector("#dealerHitCardButton")
-    .addEventListener("click", () => {
-      newCardDrawRenderComp("dealer", 0);
-    });
   document.addEventListener("handValueChanged", (e) => {
     if (e.detail.receiver === "player") {
       document.querySelector("#playerScore").textContent = e.detail.value;
