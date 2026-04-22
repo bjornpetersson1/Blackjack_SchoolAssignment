@@ -1,13 +1,14 @@
 import { generateDeck } from "../data/deckData.js";
-import { shuffleDeck } from "./deckService.js";
+import { shuffleDeck, drawOneCard } from "./deckService.js";
 import { SaveState } from "../data/stateData.js";
 import { gameState } from "../data/stateData.js";
-import { CalculateHand } from "./stateService.js";
+import { UpdateHandValue } from "./stateService.js";
 import { Delay } from "./flowService.js";
+import { HandleValue, NotifyHandChanged } from "./valueService.js";
+import { newCardDrawRenderComp } from "../presentation/components/handCard.js";
 
 export const dealNewHand = async () => {
-  gameState.deckState = generateDeck();
-  gameState.deckState = shuffleDeck(gameState.deckState);
+  gameState.deckState = shuffleDeck(generateDeck());
   gameState.playerHands[0].cards = [];
   gameState.dealerHand.cards = [];
 
@@ -19,25 +20,22 @@ export const dealNewHand = async () => {
   // await Delay(500);
   drawOneCard("dealer", 0);
   // await Delay(500);
+  HandleIsPlayerDone();
 };
 
-export const drawOneCard = (receiver, handIndex) => {
+export const processCardDraw = (receiver, handIndex) => {
+  UpdateHandValue(receiver, handIndex);
+  HandleValue(receiver);
+  NotifyHandChanged(receiver, handIndex);
   if (receiver === "player") {
-    gameState.playerHands[handIndex].cards.push(gameState.deckState.pop());
-  } else {
-    gameState.dealerHand.cards.push(gameState.deckState.pop());
+    HandleIsPlayerDone();
   }
+};
 
-  CalculateHand(receiver, handIndex);
-  document.dispatchEvent(
-    new CustomEvent("handValueChanged", {
-      detail: {
-        receiver: receiver,
-        value:
-          receiver === "player"
-            ? gameState.playerHands[handIndex].value
-            : gameState.dealerHand.value,
-      },
-    }),
-  );
+export const HandleIsPlayerDone = () => {
+  if (gameState.playerHands.every((hand) => hand.done === true)) {
+    while (!gameState.dealerHand.done) {
+      newCardDrawRenderComp("dealer", 0);
+    }
+  }
 };

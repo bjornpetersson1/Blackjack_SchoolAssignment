@@ -1,6 +1,6 @@
 import { gameState } from "../data/stateData.js";
 
-export const CalculateHand = (owner, handIndex) => {
+export const UpdateHandValue = (owner, handIndex) => {
   if (owner === "player") {
     gameState.playerHands[handIndex].value +=
       gameState.playerHands[handIndex].cards[

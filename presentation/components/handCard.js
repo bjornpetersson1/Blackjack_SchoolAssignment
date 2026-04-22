@@ -1,5 +1,6 @@
 import { gameState } from "../../data/stateData.js";
-import { dealNewHand, drawOneCard } from "../../services/gameService.js";
+import { dealNewHand } from "../../services/gameService.js";
+import { drawOneCard } from "../../services/deckService.js";
 
 export const newHandRenderComp = () => {
   dealNewHand();
@@ -38,8 +39,6 @@ const cardToImage = (card) => {
   cardImg.src = `./data/images/${card.label}_of_${card.suit}.png`;
 
   cardImg.classList.add("card-img");
-
-  
 
   return cardImg;
 };
