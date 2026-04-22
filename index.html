@@ -11,13 +11,54 @@
   <body>
     <div id="logInDiv" class="view">Log in</div>
     <div id="blackJackDiv" class="view">
-      <h1>Gameplay</h1>
-      <button id="dealNewHandButton">NEW HAND</button>
-      <div id="playerHands">PLAYERCARDS:</div>
-      <span id="playerScore"></span>
-      <button id="playerHitCardButton">HIT PLAYER</button>
-      <div id="dealerCards">DEALERCARDS:</div>
-      <span id="dealerScore"></span>
+      <div class="game-titlebar">
+        <span class="game-title">// BLACKJACK<span class="blink">_</span></span>
+        <span class="game-subtitle"
+          >Du kan vinna pengar på 'Björns otroliga casino'</span
+        >
+      </div>
+
+      <div class="game-table">
+        <div class="player-zone">
+          <div class="profile-block">
+            <img
+              src="./data/gifs/Air_Guitar.gif"
+              class="profile-gif"
+              alt="Dealer"
+            />
+            <span class="player-label">DEALER</span>
+          </div>
+          <div class="cards-panel">
+            <div id="dealerCards" class="cards-area"></div>
+          </div>
+          <div class="score-row">
+            SCORE: <span id="dealerScore" class="score-value">--</span>
+          </div>
+        </div>
+
+        <div class="center-controls">
+          <button id="dealNewHandButton" class="btn">[ NEW HAND ]</button>
+          <div class="divider">────────────</div>
+          <button id="playerHitCardButton" class="btn">[ HIT ]</button>
+        </div>
+
+        <div class="player-zone player-zone--self">
+          <div class="profile-block">
+            <img
+              src="./data/gifs/Player_Icon.gif"
+              class="profile-gif"
+              alt="Player"
+            />
+            <span class="player-label">PLAYER</span>
+          </div>
+          <div class="cards-panel">
+            <div id="playerHands" class="cards-area"></div>
+          </div>
+          <div class="score-row">
+            SCORE: <span id="playerScore" class="score-value">--</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="depositDiv" class="view">Deposit</div>
   </body>
