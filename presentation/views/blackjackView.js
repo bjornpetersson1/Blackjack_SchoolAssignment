@@ -1,3 +1,4 @@
+import { HandleStay } from "../../services/gameService.js";
 import {
   newCardDrawRenderComp,
   newHandRenderComp,
@@ -12,6 +13,10 @@ export const initBlackjackView = () => {
     .addEventListener("click", () => {
       newCardDrawRenderComp("player", 0);
     });
+  document.querySelector("#playerStayButton").addEventListener("click", () => {
+    HandleStay(0);
+    //det här behövs uppdateras till att vara flera händer i framtiden
+  });
   document.addEventListener("handValueChanged", (e) => {
     if (e.detail.receiver === "player") {
       document.querySelector("#playerScore").textContent = e.detail.value;

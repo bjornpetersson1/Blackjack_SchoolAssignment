@@ -39,3 +39,13 @@ export const HandleIsPlayerDone = () => {
     }
   }
 };
+export const HandleIsDealerDone = () => {
+  if (gameState.dealerHand.done) {
+    
+  }
+}
+
+export const HandleStay = (handIndex) => {
+  gameState.playerHands[handIndex].done = true;
+  HandleIsPlayerDone();
+};
