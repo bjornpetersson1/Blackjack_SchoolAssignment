@@ -14,6 +14,7 @@ export const gameState = {
     done: false,
   },
   deckState: [],
+  activeRule: "",
 };
 
 export const SaveState = (gameState) => {

@@ -31,14 +31,13 @@ export const NotifyHandChanged = (receiver, handIndex) => {
   );
 };
 
-export const CalculateResult = (playerHandIndex) => {
+export const CalculateResult = (playerHand) => {
   // 0 == lost, 1 == push, 2 == win, 3 == bj;
-  const playerValue = gameState.playerHan;
-  ds[playerHandIndex].value;
+  const playerValue = playerHand.value;
   const dealerValue = gameState.dealerHand.value;
 
   if (playerValue > 21) return 0;
-  else if (playerValue === 21 && dealerValue !== 21) return 3;
+  else if (playerValue === 21 && playerHand.cards.length === 2 && dealerValue !== 21) return 3;
   else if (dealerValue > 21) return 2;
   else if (playerValue === dealerValue) return 1;
   else if (playerValue > dealerValue) return 2;

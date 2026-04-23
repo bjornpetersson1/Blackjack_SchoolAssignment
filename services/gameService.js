@@ -2,9 +2,18 @@ import { generateDeck } from "../data/deckData.js";
 import { shuffleDeck, drawOneCard } from "./deckService.js";
 import { SaveState } from "../data/stateData.js";
 import { gameState } from "../data/stateData.js";
-import { UpdateHandValue } from "./stateService.js";
+import {
+  DoubleDownRulePayoutLogic,
+  NoRulePayoutLogic,
+  SplitRulePayoutLogic,
+  UpdateHandValue,
+} from "./stateService.js";
 import { Delay } from "./flowService.js";
-import { HandleValue, NotifyHandChanged } from "./valueService.js";
+import {
+  CalculateResult,
+  HandleValue,
+  NotifyHandChanged,
+} from "./valueService.js";
 import { newCardDrawRenderComp } from "../presentation/components/handCard.js";
 
 export const initNewHand = async () => {
@@ -39,11 +48,25 @@ export const HandleIsPlayerDone = () => {
     }
   }
 };
+
+const HandleOutcome = () => {
+  // 0 == lost, 1 == push, 2 == win, 3 == bj;
+  const results = gameState.playerHands.map((hand) => CalculateResult(hand));
+  if (gameState.activeRule === "split") {
+    SplitRulePayoutLogic(results);
+  } else if (gameState.activeRule === "doubleDown") {
+    DoubleDownRulePayoutLogic(results);
+  } else {
+    NoRulePayoutLogic(results);
+  }
+  //here i do something after updating gamestate
+};
+
 export const HandleIsDealerDone = () => {
   if (gameState.dealerHand.done) {
-    
+    HandleOutcome();
   }
-}
+};
 
 export const HandleStay = (handIndex) => {
   gameState.playerHands[handIndex].done = true;
