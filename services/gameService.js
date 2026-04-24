@@ -14,9 +14,12 @@ import {
   HandleValue,
   NotifyHandChanged,
 } from "./valueService.js";
-import { newCardDrawRenderComp } from "../presentation/components/handCard.js";
+import { newCardDrawRenderComp } from "../presentation/components/cardRenders.js";
+import { showInfoScreen } from "../presentation/components/infoRender.js";
+import { GenerateResultMessage } from "./infoService.js";
 
 export const initNewHand = async () => {
+  gameState.betState = 20;
   gameState.deckState = shuffleDeck(generateDeck());
   gameState.playerHands.splice(1);
   gameState.playerHands[0].cards = [];
@@ -46,19 +49,23 @@ export const HandleIsPlayerDone = () => {
     while (!gameState.dealerHand.done) {
       newCardDrawRenderComp("dealer", 0);
     }
+    HandleIsDealerDone();
   }
 };
 
 const HandleOutcome = () => {
   // 0 == lost, 1 == push, 2 == win, 3 == bj;
   const results = gameState.playerHands.map((hand) => CalculateResult(hand));
+  let winloss;
   if (gameState.activeRule === "split") {
-    SplitRulePayoutLogic(results);
+    winloss = SplitRulePayoutLogic(results);
+    // showInfoScreen(GenerateResultMessage(results, winloss)); //DU MÅSTE LÖSA DEN HÄR HUVUDVÄRKEN
   } else if (gameState.activeRule === "doubleDown") {
-    DoubleDownRulePayoutLogic(results);
+    winloss = DoubleDownRulePayoutLogic(results);
   } else {
-    NoRulePayoutLogic(results);
+    winloss = NoRulePayoutLogic(results);
   }
+  showInfoScreen(GenerateResultMessage(results[0], winloss));
   //here i do something after updating gamestate
 };
 

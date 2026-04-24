@@ -37,3 +37,12 @@ export const drawOneCard = (receiver, handIndex) => {
   }
   processCardDraw(receiver, handIndex);
 };
+
+export const cardToImage = (card) => {
+  let cardImg = document.createElement("img");
+  cardImg.src = `./data/images/${card.label}_of_${card.suit}.png`;
+
+  cardImg.classList.add("card-img");
+
+  return cardImg;
+};

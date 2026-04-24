@@ -37,7 +37,12 @@ export const CalculateResult = (playerHand) => {
   const dealerValue = gameState.dealerHand.value;
 
   if (playerValue > 21) return 0;
-  else if (playerValue === 21 && playerHand.cards.length === 2 && dealerValue !== 21) return 3;
+  else if (
+    playerValue === 21 &&
+    playerHand.cards.length === 2 &&
+    dealerValue !== 21
+  )
+    return 3;
   else if (dealerValue > 21) return 2;
   else if (playerValue === dealerValue) return 1;
   else if (playerValue > dealerValue) return 2;

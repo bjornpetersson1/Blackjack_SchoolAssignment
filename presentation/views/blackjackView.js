@@ -2,7 +2,7 @@ import { HandleStay } from "../../services/gameService.js";
 import {
   newCardDrawRenderComp,
   newHandRenderComp,
-} from "../components/handCard.js";
+} from "../components/cardRenders.js";
 
 export const initBlackjackView = () => {
   document.querySelector("#dealNewHandButton").addEventListener("click", () => {

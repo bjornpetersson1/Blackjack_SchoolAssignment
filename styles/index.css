@@ -1,18 +1,24 @@
 /* ── reset & base ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
-  --bg:        #0f111a;
-  --surface:   #1a1c2e;
-  --surface2:  #232640;
-  --border:    #2e3155;
-  --accent:    #00ff9f;
-  --accent2:   #569cd6;
-  --text:      #cdd6f4;
-  --muted:     #6c7086;
-  --tag:       #4ec9b0;
-  --score:     #f38ba8;
-  --font:      'Courier New', Courier, monospace;
+  --bg: #0f111a;
+  --surface: #1a1c2e;
+  --surface2: #232640;
+  --border: #2e3155;
+  --accent: #00ff9f;
+  --accent2: #569cd6;
+  --text: #cdd6f4;
+  --muted: #6c7086;
+  --tag: #4ec9b0;
+  --score: #f38ba8;
+  --font: "Courier New", Courier, monospace;
 }
 
 body {
@@ -23,10 +29,15 @@ body {
 }
 
 /* ── view visibility ── */
-.view { display: none; }
+.view {
+  display: none;
+}
 
 /* ── card images ── */
-.card-img { width: 60px; height: auto; }
+.card-img {
+  width: 60px;
+  height: auto;
+}
 
 /* ── titlebar ── */
 .game-titlebar {
@@ -50,8 +61,18 @@ body {
   color: var(--muted);
 }
 
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.blink { animation: blink 1.1s step-start infinite; }
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.blink {
+  animation: blink 1.1s step-start infinite;
+}
 
 /* ── main table layout ── */
 .game-table {
@@ -177,7 +198,9 @@ body {
   border: 2px solid var(--accent);
   padding: 0.55rem 1rem;
   cursor: pointer;
-  transition: background 0.1s, color 0.1s;
+  transition:
+    background 0.1s,
+    color 0.1s;
   white-space: nowrap;
 }
 
@@ -188,4 +211,25 @@ body {
 
 .btn:active {
   transform: translateY(1px);
+}
+
+.info-overlay {
+  position: fixed; /* stays in place
+   regardless of scroll */
+  inset: 0; /* covers the
+  full screen */
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100; /* above
+  everything else */
+}
+
+.info-overlay.hidden {
+  display: none;
+}
+
+#infoMessage {
+  white-space: pre-wrap;
 }

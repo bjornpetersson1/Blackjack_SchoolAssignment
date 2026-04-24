@@ -2,6 +2,7 @@ import { gameState } from "../../data/stateData.js";
 import { initNewHand } from "../../services/gameService.js";
 import { drawOneCard } from "../../services/deckService.js";
 import { Delay } from "../../services/flowService.js";
+import { cardToImage } from "../../services/deckService.js";
 
 export const newHandRenderComp = async () => {
   initNewHand();
@@ -29,13 +30,4 @@ export const newCardDrawRenderComp = (receiver, handIndex) => {
       .querySelector("#dealerCards")
       .appendChild(cardToImage(cards[cards.length - 1]));
   }
-};
-
-const cardToImage = (card) => {
-  let cardImg = document.createElement("img");
-  cardImg.src = `./data/images/${card.label}_of_${card.suit}.png`;
-
-  cardImg.classList.add("card-img");
-
-  return cardImg;
 };
