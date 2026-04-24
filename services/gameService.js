@@ -1,5 +1,5 @@
 import { generateDeck } from "../data/deckData.js";
-import { shuffleDeck, drawOneCard } from "./deckService.js";
+import { ShuffleDeck, DrawOneCard } from "./deckService.js";
 import { SaveState } from "../data/stateData.js";
 import { gameState } from "../data/stateData.js";
 import {
@@ -14,13 +14,13 @@ import {
   HandleValue,
   NotifyHandChanged,
 } from "./valueService.js";
-import { newCardDrawRenderComp } from "../presentation/components/cardRenders.js";
-import { showInfoScreen } from "../presentation/components/infoRender.js";
+import { NewCardDrawRenderComp } from "../presentation/components/cardRender.js";
+import { ShowInfoScreen } from "../presentation/components/infoRender.js";
 import { GenerateResultMessage } from "./infoService.js";
 
-export const initNewHand = async () => {
-  gameState.betState = 20;
-  gameState.deckState = shuffleDeck(generateDeck());
+export const InitNewHand = async () => {
+  gameState.betState = Number(document.querySelector("#betInput").value);
+  gameState.deckState = ShuffleDeck(generateDeck());
   gameState.playerHands.splice(1);
   gameState.playerHands[0].cards = [];
   gameState.playerHands[0].value = 0;
@@ -35,7 +35,7 @@ export const initNewHand = async () => {
   document.querySelector("#dealerCards").replaceChildren();
 };
 
-export const processCardDraw = (receiver, handIndex) => {
+export const ProcessCardDraw = (receiver, handIndex) => {
   UpdateHandValue(receiver, handIndex);
   HandleValue(receiver);
   NotifyHandChanged(receiver, handIndex);
@@ -47,7 +47,7 @@ export const processCardDraw = (receiver, handIndex) => {
 export const HandleIsPlayerDone = () => {
   if (gameState.playerHands.every((hand) => hand.done === true)) {
     while (!gameState.dealerHand.done) {
-      newCardDrawRenderComp("dealer", 0);
+      NewCardDrawRenderComp("dealer", 0);
     }
     HandleIsDealerDone();
   }
@@ -65,7 +65,7 @@ const HandleOutcome = () => {
   } else {
     winloss = NoRulePayoutLogic(results);
   }
-  showInfoScreen(GenerateResultMessage(results[0], winloss));
+  ShowInfoScreen(GenerateResultMessage(results[0], winloss));
   //here i do something after updating gamestate
 };
 

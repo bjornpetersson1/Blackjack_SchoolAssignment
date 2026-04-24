@@ -1,22 +1,49 @@
 import { HandleStay } from "../../services/gameService.js";
+import { NotifyBalanceChanged } from "../../services/valueService.js";
 import {
-  newCardDrawRenderComp,
-  newHandRenderComp,
-} from "../components/cardRenders.js";
+  NewCardDrawRenderComp,
+  NewHandRenderComp,
+} from "../components/cardRender.js";
 
-export const initBlackjackView = () => {
+const betMin = 5;
+const betMax = 500;
+const betStep = 5;
+
+const clampBet = (value) => Math.min(betMax, Math.max(betMin, value));
+
+export const InitBlackjackView = () => {
+  const betInput = document.querySelector("#betInput");
+
+  document.querySelector("#betIncreaseButton").addEventListener("click", () => {
+    betInput.value = clampBet(Number(betInput.value) + betStep);
+  });
+
+  document.querySelector("#betDecreaseButton").addEventListener("click", () => {
+    betInput.value = clampBet(Number(betInput.value) - betStep);
+  });
+
+  betInput.addEventListener("change", () => {
+    betInput.value = clampBet(Number(betInput.value));
+  });
+
   document.querySelector("#dealNewHandButton").addEventListener("click", () => {
-    newHandRenderComp();
+    NewHandRenderComp();
   });
   document
     .querySelector("#playerHitCardButton")
     .addEventListener("click", () => {
-      newCardDrawRenderComp("player", 0);
+      NewCardDrawRenderComp("player", 0);
     });
   document.querySelector("#playerStayButton").addEventListener("click", () => {
     HandleStay(0);
     //det här behövs uppdateras till att vara flera händer i framtiden
   });
+  document.addEventListener("balanceChanged", (e) => {
+    document.querySelector("#balanceDisplay").textContent =
+      `${e.detail.balance} kr`;
+  });
+  NotifyBalanceChanged();
+
   document.addEventListener("handValueChanged", (e) => {
     if (e.detail.receiver === "player") {
       document.querySelector("#playerScore").textContent = e.detail.value;

@@ -1,4 +1,5 @@
 import { gameState } from "../data/stateData.js";
+import { NotifyBalanceChanged } from "./valueService.js";
 
 export const UpdateHandValue = (owner, handIndex) => {
   if (owner === "player") {
@@ -20,14 +21,17 @@ export const NoRulePayoutLogic = (results) => {
   } else if (results[0] === 1) {
     winloss = gameState.betState;
     gameState.userState.balance += winloss;
+    NotifyBalanceChanged();
     return winloss;
   } else if (results[0] === 2) {
     winloss = gameState.betState * 2;
     gameState.userState.balance += winloss;
+    NotifyBalanceChanged();
     return winloss;
   } else if (results[0] === 3) {
     winloss = gameState.betState * 2.5;
     gameState.userState.balance += winloss;
+    NotifyBalanceChanged();
     return winloss;
   }
 };

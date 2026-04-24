@@ -1,3 +1,49 @@
+/* ── buttons ── */
+.btn {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: var(--surface2);
+  border: 2px solid var(--accent);
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  transition:
+    background 0.1s,
+    color 0.1s;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.info-overlay {
+  position: fixed; /* stays in place
+   regardless of scroll */
+  inset: 0; /* covers the
+  full screen */
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100; /* above
+  everything else */
+}
+
+.info-overlay.hidden {
+  display: none;
+}
+
+#infoMessage {
+  white-space: pre-wrap;
+}
+
 /* ── reset & base ── */
 *,
 *::before,
@@ -127,6 +173,10 @@ body {
   padding: 0.1rem 0.5rem;
   border: 1px solid var(--border);
 }
+.bet-label {
+  font-size: 1.4rem;
+  color: var(--score);
+}
 
 .score-row {
   font-size: 0.8rem;
@@ -188,48 +238,70 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* ── buttons ── */
-.btn {
+/* ── player action buttons ── */
+.player-action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ── bet input ── */
+.bet-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.bet-btn {
+  flex-shrink: 0;
+  padding: 0.35rem 0.3rem;
+}
+
+#betInput {
   font-family: var(--font);
   font-size: 0.85rem;
   letter-spacing: 0.1em;
-  color: var(--accent);
+  color: var(--score);
   background: var(--surface2);
-  border: 2px solid var(--accent);
-  padding: 0.55rem 1rem;
-  cursor: pointer;
-  transition:
-    background 0.1s,
-    color 0.1s;
-  white-space: nowrap;
+  border: 2px solid var(--score);
+  padding: 0.45rem 1rem;
+  width: 100%;
+  text-align: center;
+  outline: none;
 }
 
-.btn:hover {
-  background: var(--accent);
-  color: var(--bg);
+#betInput::placeholder {
+  color: var(--muted);
 }
 
-.btn:active {
-  transform: translateY(1px);
+#betInput:focus {
+  background: var(--surface);
+  border-color: var(--accent2);
+  color: var(--text);
 }
 
-.info-overlay {
-  position: fixed; /* stays in place
-   regardless of scroll */
-  inset: 0; /* covers the
-  full screen */
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100; /* above
-  everything else */
+#betInput::-webkit-outer-spin-button,
+#betInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
-.info-overlay.hidden {
-  display: none;
+/* ── balance display ── */
+.balance-label {
+  font-size: 1.4rem;
+  color: var(--accent2);
 }
 
-#infoMessage {
-  white-space: pre-wrap;
+.balance-display {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--accent2);
+  background: var(--surface2);
+  border: 2px solid var(--accent2);
+  padding: 0.45rem 1rem;
+  width: 100%;
+  text-align: center;
 }
+/* #betInput[type="number"] {
+  -moz-appearance: textfield;
+} */

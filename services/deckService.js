@@ -1,7 +1,7 @@
-import { processCardDraw } from "./gameService.js";
+import { ProcessCardDraw } from "./gameService.js";
 import { gameState } from "../data/stateData.js";
 
-export const shuffleDeck = (deck) => {
+export const ShuffleDeck = (deck) => {
   for (let i = deck.length - 1; i > 0; i--) {
     const randomIndex = Math.floor(Math.random() * (i + 1));
 
@@ -10,7 +10,7 @@ export const shuffleDeck = (deck) => {
   return deck;
 };
 
-export const calculateCurrentHand = (hand) => {
+export const CalculateCurrentHand = (hand) => {
   let total = 0;
   let aceCount = 0;
 
@@ -29,16 +29,16 @@ export const calculateCurrentHand = (hand) => {
   return total;
 };
 
-export const drawOneCard = (receiver, handIndex) => {
+export const DrawOneCard = (receiver, handIndex) => {
   if (receiver === "player") {
     gameState.playerHands[handIndex].cards.push(gameState.deckState.pop());
   } else {
     gameState.dealerHand.cards.push(gameState.deckState.pop());
   }
-  processCardDraw(receiver, handIndex);
+  ProcessCardDraw(receiver, handIndex);
 };
 
-export const cardToImage = (card) => {
+export const CardToImage = (card) => {
   let cardImg = document.createElement("img");
   cardImg.src = `./data/images/${card.label}_of_${card.suit}.png`;
 

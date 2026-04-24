@@ -1,10 +1,10 @@
-import { initBlackjackView } from "./presentation/views/blackjackView.js";
+import { InitBlackjackView } from "./presentation/views/blackjackView.js";
 import { SetCurrentView } from "./services/viewService.js";
-import { hideInfoScreen } from "./presentation/components/infoRender.js";
+import { HideInfoScreen } from "./presentation/components/infoRender.js";
 
-initBlackjackView();
+InitBlackjackView();
 SetCurrentView("blackJackDiv");
 //more global buttons => break out
 document
   .querySelector("#infoDismissButton")
-  .addEventListener("click", hideInfoScreen);
+  .addEventListener("click", HideInfoScreen);

@@ -17,6 +17,14 @@ export const HandleValue = (owner) => {
   }
 };
 
+export const NotifyBalanceChanged = () => {
+  document.dispatchEvent(
+    new CustomEvent("balanceChanged", {
+      detail: { balance: gameState.userState.balance },
+    }),
+  );
+};
+
 export const NotifyHandChanged = (receiver, handIndex) => {
   document.dispatchEvent(
     new CustomEvent("handValueChanged", {
