@@ -2,7 +2,6 @@ import { gameState } from "../../data/stateData.js";
 import {
   CalculatorLogic,
   HandleStringToNumTransfer,
-  ResetDepositView,
 } from "../../services/depositService.js";
 import {
   GetValueFromComponent,
@@ -16,7 +15,7 @@ export const InitDepositView = () => {
 
   document.querySelectorAll(".calc-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      CalculatorLogic(expression, depInput);
+      expression = CalculatorLogic(expression, depInput, btn);
     });
   });
 
@@ -29,8 +28,9 @@ export const InitDepositView = () => {
   document
     .querySelector("#confirmDepositButton")
     .addEventListener("click", () => {
-      HandleStringToNumTransfer("depositInput", gameState.userState.balance);
-      ResetDepositView(depInput.value, expression);
+      HandleStringToNumTransfer("depositInput");
+      depInput.value = "";
+      expression = "";
       NotifyBalanceChanged();
       SetCurrentView("blackJackDiv");
     });

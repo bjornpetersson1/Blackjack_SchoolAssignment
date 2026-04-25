@@ -1,5 +1,7 @@
-export const CalculatorLogic = (expressionContainer, valueSource) => {
-  const key = btn.dataset.key;
+import { GetValueFromComponent } from "./valueService.js";
+import { gameState } from "../data/stateData.js";
+export const CalculatorLogic = (expressionContainer, valueSource, button) => {
+  const key = button.dataset.key;
   if (key === "C") {
     expressionContainer = "";
   } else if (key === "=") {
@@ -7,15 +9,10 @@ export const CalculatorLogic = (expressionContainer, valueSource) => {
   } else {
     expressionContainer += key;
   }
-  valueSource = expressionContainer;
+  valueSource.value = expressionContainer;
+  return expressionContainer;
 };
-
-export const ResetDepositView = (valueSource, expressionContainer) => {
-  valueSource = "";
-  expressionContainer = "";
-};
-
-export const HandleStringToNumTransfer = (valueOriginId, ValueDestination) => {
+export const HandleStringToNumTransfer = (valueOriginId) => {
   const value = Math.round(Number(GetValueFromComponent(valueOriginId)));
-  ValueDestination += value;
+  gameState.userState.balance += value;
 };
