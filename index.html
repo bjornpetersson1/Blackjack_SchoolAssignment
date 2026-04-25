@@ -9,6 +9,12 @@
     <script src="./App.js" type="module"></script>
   </head>
   <body>
+    <div class="game-titlebar">
+      <span class="game-title">// BLACKJACK<span class="blink">_</span></span>
+      <span class="game-subtitle"
+        >Du kan vinna pengar på 'Björns otroliga casino'</span
+      >
+    </div>
     <div id="logInDiv" class="view">Log in</div>
     <div id="blackJackDiv" class="view">
       <div id="infoScreen" class="info-overlay hidden">
@@ -16,12 +22,6 @@
           <p id="infoMessage"></p>
           <button id="infoDismissButton" class="btn">[ OK ]</button>
         </div>
-      </div>
-      <div class="game-titlebar">
-        <span class="game-title">// BLACKJACK<span class="blink">_</span></span>
-        <span class="game-subtitle"
-          >Du kan vinna pengar på 'Björns otroliga casino'</span
-        >
       </div>
 
       <div class="game-table">
@@ -86,6 +86,51 @@
         </div>
       </div>
     </div>
-    <div id="depositDiv" class="view">Deposit</div>
+    <div id="depositDiv" class="view">
+      <div class="deposit-table">
+        <div class="profile-block">
+          <img
+            src="./data/gifs/Dance_Single.gif"
+            class="profile-gif deposit-gif"
+            alt="Deposit"
+          />
+          <span class="player-label">DEPOSIT</span>
+        </div>
+        <div class="divider">────────────</div>
+        <div class="player-label balance-label">AMOUNT</div>
+        <div class="deposit-calculator">
+          <input
+            type="text"
+            id="depositInput"
+            class="deposit-input"
+            placeholder="0"
+            readonly
+          />
+          <div class="calc-grid">
+            <button class="btn calc-btn calc-num" data-key="7">7</button>
+            <button class="btn calc-btn calc-num" data-key="8">8</button>
+            <button class="btn calc-btn calc-num" data-key="9">9</button>
+            <button class="btn calc-btn calc-op"  data-key="C">C</button>
+            <button class="btn calc-btn calc-num" data-key="4">4</button>
+            <button class="btn calc-btn calc-num" data-key="5">5</button>
+            <button class="btn calc-btn calc-num" data-key="6">6</button>
+            <button class="btn calc-btn calc-op"  data-key="/">/</button>
+            <button class="btn calc-btn calc-num" data-key="1">1</button>
+            <button class="btn calc-btn calc-num" data-key="2">2</button>
+            <button class="btn calc-btn calc-num" data-key="3">3</button>
+            <button class="btn calc-btn calc-op"  data-key="*">*</button>
+            <button class="btn calc-btn calc-num" data-key="0">0</button>
+            <button class="btn calc-btn calc-op"  data-key="+">+</button>
+            <button class="btn calc-btn calc-op"  data-key="-">-</button>
+            <button class="btn calc-btn calc-eq"  data-key="=">=</button>
+          </div>
+        </div>
+        <div class="divider">────────────</div>
+        <div class="deposit-action-buttons">
+          <button id="confirmDepositButton" class="btn">[ DEPOSIT ]</button>
+          <button id="backFromDepositButton" class="btn">[ BACK ]</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

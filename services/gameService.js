@@ -12,6 +12,7 @@ import { Delay } from "./flowService.js";
 import {
   CalculateResult,
   HandleValue,
+  NotifyBalanceChanged,
   NotifyHandChanged,
 } from "./valueService.js";
 import { NewCardDrawRenderComp } from "../presentation/components/cardRender.js";
@@ -19,7 +20,10 @@ import { ShowInfoScreen } from "../presentation/components/infoRender.js";
 import { GenerateResultMessage } from "./infoService.js";
 
 export const InitNewHand = async () => {
-  gameState.betState = Number(document.querySelector("#betInput").value);
+  const bet = Number(document.querySelector("#betInput").value);
+  gameState.betState = bet;
+  gameState.userState.balance -= bet;
+  NotifyBalanceChanged();
   gameState.deckState = ShuffleDeck(generateDeck());
   gameState.playerHands.splice(1);
   gameState.playerHands[0].cards = [];
