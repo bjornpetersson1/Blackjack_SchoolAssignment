@@ -24,46 +24,45 @@
     </div>
     <div id="login-div" class="view">
       <div id="login-container" class="board">
-        <div class="input-div">
+        <form class="input-div">
           <span>
             <p>Username</p>
-            <input type="text" />
-            <button id="login-btn" class="btn">Login</button>
+            <input id="username-input" type="text" />
+            <button id="login-btn" type="button" class="btn">Login</button>
           </span>
           <span>
             <p>Password</p>
-            <input type="password" />
-            <button id="create-new-user-btn" class="btn">
+            <input id="password-input" type="password" />
+            <button id="create-new-user-btn" type="button" class="btn">
               Create new user
             </button>
           </span>
-        </div>
+        </form>
       </div>
     </div>
     <div id="create-new-user-div" class="view">
       <div id="create-new-user-container" class="board">
-        <div class="input-div">
+        <form class="input-div">
           <span>
             <p>Username</p>
-            <input type="text" />
-            <button id="create-btn" class="btn">Create</button></span
+            <input id="create-username-input" type="text" />
+            <button id="create-btn" type="button" class="btn">Create</button></span
           >
           <span>
             <p>Password</p>
-            <input type="text" />
-            <button id="cancel-btn" class="btn">Cancel</button></span
+            <input id="create-password-input" type="password" />
+            <button id="cancel-btn" type="button" class="btn">Cancel</button></span
           >
-        </div>
+        </form>
+      </div>
+    </div>
+    <div id="infoScreen" class="info-overlay hidden">
+      <div class="info-box">
+        <p id="infoMessage"></p>
+        <button id="infoDismissButton" class="btn">[ OK ]</button>
       </div>
     </div>
     <div id="blackjack-div" class="view">
-      <div id="infoScreen" class="info-overlay hidden">
-        <div class="info-box">
-          <p id="infoMessage"></p>
-          <button id="infoDismissButton" class="btn">[ OK ]</button>
-        </div>
-      </div>
-
       <div class="game-table">
         <div class="player-zone">
           <div class="profile-block">
