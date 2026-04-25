@@ -22,7 +22,7 @@ export const InitDepositView = () => {
   document
     .querySelector("#backFromDepositButton")
     .addEventListener("click", () => {
-      SetCurrentView("blackJackDiv");
+      SetCurrentView("blackjack-div");
     });
 
   document
@@ -32,6 +32,6 @@ export const InitDepositView = () => {
       depInput.value = "";
       expression = "";
       NotifyBalanceChanged();
-      SetCurrentView("blackJackDiv");
+      SetCurrentView("blackjack-div");
     });
 };

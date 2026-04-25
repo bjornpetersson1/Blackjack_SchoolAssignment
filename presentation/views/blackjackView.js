@@ -1,10 +1,14 @@
 import { HandleStay } from "../../services/gameService.js";
-import { NotifyBalanceChanged } from "../../services/valueService.js";
+import {
+  CheckIfValueIsLessOrEqual,
+  NotifyBalanceChanged,
+} from "../../services/valueService.js";
 import { SetCurrentView } from "../../services/viewService.js";
 import {
   NewCardDrawRenderComp,
   NewHandRenderComp,
 } from "../components/cardRender.js";
+import { ShowInfoScreen } from "../components/infoRender.js";
 
 const betMin = 5;
 const betMax = 500;
@@ -25,7 +29,11 @@ export const InitBlackjackView = () => {
   });
 
   document.querySelector("#dealNewHandButton").addEventListener("click", () => {
-    NewHandRenderComp();
+    if (CheckIfValueIsLessOrEqual(Number(betInput.value))) {
+      NewHandRenderComp();
+    } else {
+      ShowInfoScreen("Insufficent funds");
+    }
   });
 
   document
@@ -44,6 +52,11 @@ export const InitBlackjackView = () => {
     .addEventListener("click", () => {
       SetCurrentView("depositDiv");
     });
+
+  document.querySelector("#logout-button").addEventListener("click", () => {
+    SetCurrentView("login-div");
+  });
+
   //---------------EVENTS------------
 
   betInput.addEventListener("change", () => {

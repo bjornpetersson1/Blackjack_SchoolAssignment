@@ -17,7 +17,6 @@ export const HandleValue = (owner) => {
   }
 };
 
-
 export const NotifyHandChanged = (receiver, handIndex) => {
   document.dispatchEvent(
     new CustomEvent("handValueChanged", {
@@ -27,7 +26,7 @@ export const NotifyHandChanged = (receiver, handIndex) => {
           receiver === "player"
             ? gameState.playerHands[handIndex].value
             : gameState.dealerHand.value,
-          },
+      },
     }),
   );
 };
@@ -36,14 +35,14 @@ export const CalculateResult = (playerHand) => {
   // 0 == lost, 1 == push, 2 == win, 3 == bj;
   const playerValue = playerHand.value;
   const dealerValue = gameState.dealerHand.value;
-  
+
   if (playerValue > 21) return 0;
   else if (
     playerValue === 21 &&
     playerHand.cards.length === 2 &&
     dealerValue !== 21
   )
-  return 3;
+    return 3;
   else if (dealerValue > 21) return 2;
   else if (playerValue === dealerValue) return 1;
   else if (playerValue > dealerValue) return 2;
@@ -52,7 +51,7 @@ export const CalculateResult = (playerHand) => {
 
 export const GetValueFromComponent = (id) => {
   return document.querySelector(`#${id}`).value;
-}
+};
 
 export const NotifyBalanceChanged = () => {
   document.dispatchEvent(
@@ -60,4 +59,15 @@ export const NotifyBalanceChanged = () => {
       detail: { balance: gameState.userState.balance },
     }),
   );
+};
+
+export const CheckIfValueIsLessOrEqual = (tryValue) => {
+  if (
+    tryValue < gameState.userState.balance ||
+    tryValue === gameState.userState.balance
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 };
