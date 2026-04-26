@@ -3,6 +3,7 @@ import { InitNewHand } from "../../services/gameService.js";
 import { DrawOneCard } from "../../services/deckService.js";
 import { Delay } from "../../services/flowService.js";
 import { CardToImage } from "../../services/deckService.js";
+import { CheckIfExtraRuleApplies } from "../../services/rulesService.js";
 
 export const NewHandRenderComp = async () => {
   InitNewHand();
@@ -14,6 +15,7 @@ export const NewHandRenderComp = async () => {
   NewCardDrawRenderComp("player", 0);
   await Delay(500);
   NewCardDrawRenderComp("dealer", 0);
+  CheckIfExtraRuleApplies();
 };
 
 export const NewCardDrawRenderComp = (receiver, handIndex) => {

@@ -7,6 +7,7 @@ import {
 } from "../../services/authService.js";
 import { NotifyBalanceChanged } from "../../services/valueService.js";
 import { SetCurrentView } from "../../services/viewService.js";
+import { ShowMessageScreen } from "../components/infoRender.js";
 
 export const InitLoginView = () => {
   document.querySelector("#login-btn").addEventListener("click", () => {
