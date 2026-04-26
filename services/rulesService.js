@@ -4,8 +4,9 @@ import {
   ShowMessageScreen,
   HideMessageScreen,
 } from "../presentation/components/infoRender.js";
-import { HandleIsPlayerDone } from "./gameService.js";
+import { HandleIsPlayerDone, HandleStay } from "./gameService.js";
 import { NotifyHandChanged } from "./valueService.js";
+import { CreateHandDiv } from "../presentation/components/splitRender.js";
 
 export const CheckIfExtraRuleApplies = () => {
   if (
@@ -29,7 +30,8 @@ export const CheckIfExtraRuleApplies = () => {
     ShowMessageScreen("Split hand?", "choice");
     document.querySelector("#choiceYesButton").onclick = () => {
       HideMessageScreen();
-      SplitLogic();
+      gameState.isSplitActive = true;
+      SplitLogic(splitIndex);
     };
   }
 };
@@ -43,4 +45,22 @@ const DoubleDownLogic = () => {
   gameState.playerHands[0].done = true;
   HandleIsPlayerDone();
 };
-const SplitLogic = () => {};
+
+const SplitLogic = (index) => {
+  const handsCount = gameState.playerHands.length;
+  gameState.playerHands.push({ cards: [], value: 0, done: false });
+
+  const movedCard = gameState.playerHands[index].cards.pop();
+  gameState.playerHands[index].value -= movedCard.value;
+  gameState.playerHands[handsCount].cards.push(movedCard);
+  gameState.playerHands[handsCount].value += movedCard.value;
+
+  CreateHandDiv(handsCount, NewCardDrawRenderComp, HandleStay);
+
+  const sourceArea = document.querySelector(`#playerHands-${index}`);
+  const targetArea = document.querySelector(`#playerHands-${handsCount}`);
+  targetArea.appendChild(sourceArea.lastChild);
+
+  NotifyHandChanged("player", index);
+  NotifyHandChanged("player", handsCount);
+};

@@ -1,3 +1,6 @@
 SPLIT
-Ljud
+    markera stay/bust
+
+inaktivera knappar man inte får använda
 Flow
+Ljud

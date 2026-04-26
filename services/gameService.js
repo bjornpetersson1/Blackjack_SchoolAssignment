@@ -3,7 +3,7 @@ import { ShuffleDeck, DrawOneCard, CardToImage } from "./deckService.js";
 import { gameState } from "../data/stateData.js";
 import {
   DoubleDownRulePayoutLogic,
-  NoRulePayoutLogic,
+  NoSplitPayoutLogic,
   SplitRulePayoutLogic,
   UpdateHandValue,
   SaveGameState,
@@ -30,13 +30,14 @@ export const InitNewHand = async () => {
   gameState.playerHands[0].value = 0;
   NotifyHandChanged("player", 0);
   gameState.playerHands[0].done = false;
+  gameState.isSplitActive = false;
   gameState.dealerHand.cards = [];
   gameState.dealerHand.value = 0;
   gameState.dealerHand.holeCardRevealed = false;
   NotifyHandChanged("dealer", 0);
   gameState.dealerHand.done = false;
 
-  document.querySelector("#playerHands").replaceChildren();
+  document.querySelector("#hands-div").replaceChildren();
   document.querySelector("#dealerCards").replaceChildren();
 };
 
@@ -68,13 +69,11 @@ const HandleOutcome = () => {
   // 0 == lost, 1 == push, 2 == win, 3 == bj;
   const results = gameState.playerHands.map((hand) => CalculateResult(hand));
   let winloss;
-  if (gameState.activeRule === "split") {
+  if (gameState.isSplitActive) {
     winloss = SplitRulePayoutLogic(results);
     // showInfoScreen(GenerateResultMessage(results, winloss)); //DU MÅSTE LÖSA DEN HÄR HUVUDVÄRKEN
-  } else if (gameState.activeRule === "doubleDown") {
-    winloss = DoubleDownRulePayoutLogic(results);
   } else {
-    winloss = NoRulePayoutLogic(results);
+    winloss = NoSplitPayoutLogic(results);
   }
   ShowMessageScreen(GenerateResultMessage(results[0], winloss), "info");
   //here i do something after updating gamestate

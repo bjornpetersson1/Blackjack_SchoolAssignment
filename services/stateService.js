@@ -13,7 +13,7 @@ export const UpdateHandValue = (owner, handIndex) => {
   }
 };
 
-export const NoRulePayoutLogic = (results) => {
+export const NoSplitPayoutLogic = (results) => {
   let winloss;
   if (results[0] === 0) {
     winloss = gameState.betState;

@@ -1,15 +1,11 @@
 import { gameState } from "../../data/stateData.js";
-import { HandleStay } from "../../services/gameService.js";
 import { SaveGameState } from "../../services/stateService.js";
 import {
   CheckIfValueIsLessOrEqual,
   NotifyBalanceChanged,
 } from "../../services/valueService.js";
 import { SetCurrentView } from "../../services/viewService.js";
-import {
-  NewCardDrawRenderComp,
-  NewHandRenderComp,
-} from "../components/cardRender.js";
+import { NewHandRenderComp } from "../components/cardRender.js";
 import { ShowMessageScreen } from "../components/infoRender.js";
 
 const betMin = 5;
@@ -40,17 +36,6 @@ export const InitBlackjackView = () => {
   });
 
   document
-    .querySelector("#playerHitCardButton")
-    .addEventListener("click", () => {
-      NewCardDrawRenderComp("player", 0);
-    });
-
-  document.querySelector("#playerStayButton").addEventListener("click", () => {
-    HandleStay(0);
-    //det här behövs uppdateras till att vara flera händer i framtiden
-  });
-
-  document
     .querySelector("#depositMoneyButton")
     .addEventListener("click", () => {
       SetCurrentView("depositDiv");
@@ -74,8 +59,8 @@ export const InitBlackjackView = () => {
 
   document.addEventListener("handValueChanged", (e) => {
     if (e.detail.receiver === "player") {
-      document.querySelector("#playerScore").textContent = e.detail.value;
-      //det här behövs uppdateras till att vara flera händer i framtiden
+      const scoreEl = document.querySelector(`#playerScore-${e.detail.handIndex}`);
+      if (scoreEl) scoreEl.textContent = e.detail.value;
     } else {
       const cards = gameState.dealerHand.cards;
       const visibleValue =

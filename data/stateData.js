@@ -1,4 +1,3 @@
-
 export const gameState = {
   userState: { name: "", password: "", balance: 0 },
   betState: 0,
@@ -16,12 +15,5 @@ export const gameState = {
     holeCardRevealed: false,
   },
   deckState: [],
-  activeRule: "",
+  isSplitActive: false,
 };
-
-// export const SaveState = (gameState) => {
-//   localStorage.setItem(
-//     gameState.userState.name,
-//     JSON.stringify(gameState.userState),
-//   );
-// };

@@ -22,6 +22,7 @@ export const NotifyHandChanged = (receiver, handIndex) => {
     new CustomEvent("handValueChanged", {
       detail: {
         receiver,
+        handIndex,
         value:
           receiver === "player"
             ? gameState.playerHands[handIndex].value

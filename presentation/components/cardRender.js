@@ -1,12 +1,14 @@
 import { gameState } from "../../data/stateData.js";
-import { InitNewHand } from "../../services/gameService.js";
+import { InitNewHand, HandleStay } from "../../services/gameService.js";
 import { DrawOneCard } from "../../services/deckService.js";
 import { Delay } from "../../services/flowService.js";
 import { CardToImage } from "../../services/deckService.js";
 import { CheckIfExtraRuleApplies } from "../../services/rulesService.js";
+import { CreateHandDiv } from "./splitRender.js";
 
 export const NewHandRenderComp = async () => {
   InitNewHand();
+  CreateHandDiv(0, NewCardDrawRenderComp, HandleStay);
   await Delay(500);
   NewCardDrawRenderComp("player", 0);
   await Delay(500);
@@ -23,7 +25,7 @@ export const NewCardDrawRenderComp = (receiver, handIndex) => {
     DrawOneCard(receiver, handIndex);
     const cards = gameState.playerHands[handIndex].cards;
     document
-      .querySelector("#playerHands")
+      .querySelector(`#playerHands-${handIndex}`)
       .appendChild(CardToImage(cards[cards.length - 1]));
   } else {
     DrawOneCard(receiver, 0);
