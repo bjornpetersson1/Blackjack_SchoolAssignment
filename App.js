@@ -10,12 +10,16 @@ document.querySelectorAll(".board").forEach((board) => {
   board.prepend(logoTemplate.content.cloneNode(true));
 });
 
+document
+  .querySelector("#decisionYesButton")
+  .addEventListener("click", () => {});
+document.querySelector("#decisionNoButton").addEventListener("click", () => {});
+
+//more global buttons => break out
+document.querySelector(".dismiss").addEventListener("click", HideInfoScreen);
+
 InitBlackjackView();
 InitDepositView();
 InitLoginView();
 InitCreateNewUserView();
 SetCurrentView("login-div");
-//more global buttons => break out
-document
-  .querySelector("#infoDismissButton")
-  .addEventListener("click", HideInfoScreen);

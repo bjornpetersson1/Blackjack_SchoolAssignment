@@ -1,6 +1,6 @@
 import { GetValueFromComponent } from "./valueService.js";
 import { gameState } from "../data/stateData.js";
-import { ShowInfoScreen } from "../presentation/components/infoRender.js";
+import { ShowMessageScreen } from "../presentation/components/infoRender.js";
 export const CalculatorLogic = (expressionContainer, valueSource, button) => {
   const key = button.dataset.key;
   if (key === "C") {
@@ -16,7 +16,7 @@ export const CalculatorLogic = (expressionContainer, valueSource, button) => {
 export const HandleStringToNumTransfer = (valueOriginId) => {
   const value = Math.round(Number(GetValueFromComponent(valueOriginId)));
   if (isNaN(value)) {
-    ShowInfoScreen("You tried to pass not a number");
+    ShowMessageScreen("You tried to pass not a number", "info");
   } else {
     gameState.userState.balance += value;
   }

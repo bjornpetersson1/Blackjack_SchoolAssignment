@@ -1,14 +1,17 @@
 import { gameState } from "../data/stateData.js";
-import { ShowInfoScreen } from "../presentation/components/infoRender.js";
+import { ShowMessageScreen } from "../presentation/components/infoRender.js";
 
 export const CheckValidCreateInput = (userName, password) => {
   const userNameLower = userName.toLowerCase();
   if (!userName.trim() || !password.trim()) {
-    ShowInfoScreen("Username and/or password can not be empty");
+    ShowMessageScreen("Username and/or password can not be empty", "info");
     return false;
   }
   if (localStorage.getItem(userNameLower) != null) {
-    ShowInfoScreen(userName + " is already taken, choose a different name");
+    ShowMessageScreen(
+      userName + " is already taken, choose a different name",
+      "info",
+    );
     return false;
   }
   return true;
@@ -17,16 +20,16 @@ export const CheckValidCreateInput = (userName, password) => {
 export const CheckValidLoginInput = (userName, password) => {
   const userNameLower = userName.toLowerCase();
   if (!userName.trim() || !password.trim()) {
-    ShowInfoScreen("Username and/or password can not be empty");
+    ShowMessageScreen("Username and/or password can not be empty", "info");
     return false;
   }
   const stored = localStorage.getItem(userNameLower);
   if (stored == null) {
-    ShowInfoScreen("User not found, consider creating a new one");
+    ShowMessageScreen("User not found, consider creating a new one", "info");
     return false;
   }
   if (JSON.parse(stored).userState.password !== password) {
-    ShowInfoScreen("Wrong password, try again");
+    ShowMessageScreen("Wrong password, try again", "info");
     return false;
   }
   return true;

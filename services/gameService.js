@@ -16,7 +16,7 @@ import {
   NotifyHandChanged,
 } from "./valueService.js";
 import { NewCardDrawRenderComp } from "../presentation/components/cardRender.js";
-import { ShowInfoScreen } from "../presentation/components/infoRender.js";
+import { ShowMessageScreen } from "../presentation/components/infoRender.js";
 import { GenerateResultMessage } from "./infoService.js";
 
 export const InitNewHand = async () => {
@@ -76,7 +76,7 @@ const HandleOutcome = () => {
   } else {
     winloss = NoRulePayoutLogic(results);
   }
-  ShowInfoScreen(GenerateResultMessage(results[0], winloss));
+  ShowMessageScreen(GenerateResultMessage(results[0], winloss), "info");
   //here i do something after updating gamestate
 };
 

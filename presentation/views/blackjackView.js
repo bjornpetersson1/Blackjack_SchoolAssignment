@@ -10,7 +10,7 @@ import {
   NewCardDrawRenderComp,
   NewHandRenderComp,
 } from "../components/cardRender.js";
-import { ShowInfoScreen } from "../components/infoRender.js";
+import { ShowMessageScreen } from "../components/infoRender.js";
 
 const betMin = 5;
 const betMax = 500;
@@ -35,7 +35,7 @@ export const InitBlackjackView = () => {
       NewHandRenderComp();
       SaveGameState(gameState);
     } else {
-      ShowInfoScreen("Insufficent funds");
+      ShowMessageScreen("Insufficent funds", "info");
     }
   });
 
