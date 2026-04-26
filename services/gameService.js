@@ -1,12 +1,12 @@
 import { generateDeck } from "../data/deckData.js";
 import { ShuffleDeck, DrawOneCard } from "./deckService.js";
-import { SaveState } from "../data/stateData.js";
 import { gameState } from "../data/stateData.js";
 import {
   DoubleDownRulePayoutLogic,
   NoRulePayoutLogic,
   SplitRulePayoutLogic,
   UpdateHandValue,
+  SaveGameState,
 } from "./stateService.js";
 import { Delay } from "./flowService.js";
 import {
@@ -82,4 +82,5 @@ export const HandleIsDealerDone = () => {
 export const HandleStay = (handIndex) => {
   gameState.playerHands[handIndex].done = true;
   HandleIsPlayerDone();
+  SaveGameState(gameState);
 };

@@ -1,11 +1,6 @@
 import { gameState } from "../data/stateData.js";
 import { ShowInfoScreen } from "../presentation/components/infoRender.js";
 
-export const SaveGameState = (activeGameState) => {
-  const userNameLower = activeGameState.userState.name.toLowerCase();
-  localStorage.setItem(userNameLower, JSON.stringify(activeGameState));
-};
-
 export const CheckValidCreateInput = (userName, password) => {
   const userNameLower = userName.toLowerCase();
   if (!userName.trim() || !password.trim()) {

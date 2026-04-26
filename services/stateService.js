@@ -59,3 +59,8 @@ export const DoubleDownRulePayoutLogic = (results) => {
   //       gameState.userState.balance += gameState.betState * 2.5;
   //     }
 };
+
+export const SaveGameState = (activeGameState) => {
+  const userNameLower = activeGameState.userState.name.toLowerCase();
+  localStorage.setItem(userNameLower, JSON.stringify(activeGameState));
+};

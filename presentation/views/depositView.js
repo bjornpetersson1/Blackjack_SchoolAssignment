@@ -3,6 +3,7 @@ import {
   CalculatorLogic,
   HandleStringToNumTransfer,
 } from "../../services/depositService.js";
+import { SaveGameState } from "../../services/stateService.js";
 import {
   GetValueFromComponent,
   NotifyBalanceChanged,
@@ -32,6 +33,7 @@ export const InitDepositView = () => {
       depInput.value = "";
       expression = "";
       NotifyBalanceChanged();
+      SaveGameState(gameState);
       SetCurrentView("blackjack-div");
     });
 };

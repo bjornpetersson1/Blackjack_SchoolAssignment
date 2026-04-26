@@ -2,8 +2,8 @@ import { SetCurrentView } from "../../services/viewService.js";
 import {
   CheckValidCreateInput,
   CreateNewUser,
-  SaveGameState,
 } from "../../services/authService.js";
+import { SaveGameState } from "../../services/stateService.js";
 
 export const InitCreateNewUserView = () => {
   document.querySelector("#create-btn").addEventListener("click", () => {

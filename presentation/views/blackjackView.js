@@ -1,4 +1,6 @@
+import { gameState } from "../../data/stateData.js";
 import { HandleStay } from "../../services/gameService.js";
+import { SaveGameState } from "../../services/stateService.js";
 import {
   CheckIfValueIsLessOrEqual,
   NotifyBalanceChanged,
@@ -31,6 +33,7 @@ export const InitBlackjackView = () => {
   document.querySelector("#dealNewHandButton").addEventListener("click", () => {
     if (CheckIfValueIsLessOrEqual(Number(betInput.value))) {
       NewHandRenderComp();
+      SaveGameState(gameState);
     } else {
       ShowInfoScreen("Insufficent funds");
     }
