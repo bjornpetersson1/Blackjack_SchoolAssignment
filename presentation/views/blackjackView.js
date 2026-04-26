@@ -77,7 +77,14 @@ export const InitBlackjackView = () => {
       document.querySelector("#playerScore").textContent = e.detail.value;
       //det här behövs uppdateras till att vara flera händer i framtiden
     } else {
-      document.querySelector("#dealerScore").textContent = e.detail.value;
+      const cards = gameState.dealerHand.cards;
+      const visibleValue =
+        cards.length < 2
+          ? 0
+          : cards.length === 2 && !gameState.dealerHand.holeCardRevealed
+            ? cards[1].value
+            : e.detail.value;
+      document.querySelector("#dealerScore").textContent = visibleValue;
     }
   });
 };

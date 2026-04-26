@@ -1,5 +1,5 @@
 import { generateDeck } from "../data/deckData.js";
-import { ShuffleDeck, DrawOneCard } from "./deckService.js";
+import { ShuffleDeck, DrawOneCard, CardToImage } from "./deckService.js";
 import { gameState } from "../data/stateData.js";
 import {
   DoubleDownRulePayoutLogic,
@@ -32,6 +32,7 @@ export const InitNewHand = async () => {
   gameState.playerHands[0].done = false;
   gameState.dealerHand.cards = [];
   gameState.dealerHand.value = 0;
+  gameState.dealerHand.holeCardRevealed = false;
   NotifyHandChanged("dealer", 0);
   gameState.dealerHand.done = false;
 
@@ -50,6 +51,12 @@ export const ProcessCardDraw = (receiver, handIndex) => {
 
 export const HandleIsPlayerDone = () => {
   if (gameState.playerHands.every((hand) => hand.done === true)) {
+    const card = gameState.dealerHand.cards[0];
+    document
+      .querySelector("#dealerCards")
+      .firstChild.replaceWith(CardToImage(card));
+    gameState.dealerHand.holeCardRevealed = true;
+    NotifyHandChanged("dealer", 0);
     while (!gameState.dealerHand.done) {
       NewCardDrawRenderComp("dealer", 0);
     }

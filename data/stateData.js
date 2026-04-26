@@ -13,6 +13,7 @@ export const gameState = {
     cards: [],
     value: 0,
     done: false,
+    holeCardRevealed: false,
   },
   deckState: [],
   activeRule: "",

@@ -26,8 +26,10 @@ export const NewCardDrawRenderComp = (receiver, handIndex) => {
   } else {
     DrawOneCard(receiver, 0);
     const cards = gameState.dealerHand.cards;
-    document
-      .querySelector("#dealerCards")
-      .appendChild(CardToImage(cards[cards.length - 1]));
+    const card =
+      cards.length === 1
+        ? { label: "back", suit: "card" }
+        : cards[cards.length - 1];
+    document.querySelector("#dealerCards").appendChild(CardToImage(card));
   }
 };
