@@ -7,6 +7,7 @@ import {
 import { HandleIsPlayerDone, HandleStay } from "./gameService.js";
 import { NotifyHandChanged } from "./valueService.js";
 import { CreateHandDiv } from "../presentation/components/splitRender.js";
+import { MarkHandDivDoneVisually } from "./flowService.js";
 
 export const CheckIfExtraRuleApplies = () => {
   if (
@@ -43,6 +44,7 @@ const DoubleDownLogic = () => {
   NewCardDrawRenderComp("player", 0);
   NotifyHandChanged("player", 0);
   gameState.playerHands[0].done = true;
+  MarkHandDivDoneVisually(0);
   HandleIsPlayerDone();
 };
 
@@ -61,6 +63,6 @@ const SplitLogic = (index) => {
   const targetArea = document.querySelector(`#playerHands-${handsCount}`);
   targetArea.appendChild(sourceArea.lastChild);
 
-  NotifyHandChanged("player", index);
-  NotifyHandChanged("player", handsCount);
+  NewCardDrawRenderComp("player", index);
+  NewCardDrawRenderComp("player", handsCount);
 };

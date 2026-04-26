@@ -5,6 +5,7 @@ import {
   Login,
   SetActiveUserToGamestate,
 } from "../../services/authService.js";
+import { SetPlayerLabel } from "../../services/gameService.js";
 import { NotifyBalanceChanged } from "../../services/valueService.js";
 import { SetCurrentView } from "../../services/viewService.js";
 import { ShowMessageScreen } from "../components/infoRender.js";
@@ -16,6 +17,7 @@ export const InitLoginView = () => {
     if (CheckValidLoginInput(username, password)) {
       SetActiveUserToGamestate(Login(username, password));
       NotifyBalanceChanged();
+      SetPlayerLabel();
       SetCurrentView("blackjack-div");
     }
   });

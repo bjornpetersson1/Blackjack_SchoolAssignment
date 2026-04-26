@@ -8,7 +8,7 @@ import {
   UpdateHandValue,
   SaveGameState,
 } from "./stateService.js";
-import { Delay } from "./flowService.js";
+import { Delay, MarkHandDivDoneVisually } from "./flowService.js";
 import {
   CalculateResult,
   HandleValue,
@@ -87,6 +87,12 @@ export const HandleIsDealerDone = () => {
 
 export const HandleStay = (handIndex) => {
   gameState.playerHands[handIndex].done = true;
+  MarkHandDivDoneVisually(handIndex);
   HandleIsPlayerDone();
   SaveGameState(gameState);
+};
+
+export const SetPlayerLabel = () => {
+  const nameLabel = gameState.userState.name;
+  document.querySelector("#player-name").textContent = nameLabel.toUpperCase();
 };

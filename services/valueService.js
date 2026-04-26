@@ -1,14 +1,19 @@
 import { gameState } from "../data/stateData.js";
+import { MarkHandDivDoneVisually } from "./flowService.js";
 
 export const HandleValue = (owner) => {
   if (owner === "player") {
+    let index = 0;
     gameState.playerHands.forEach((hand) => {
       if (hand.value == 21) {
         hand.done = true;
+        MarkHandDivDoneVisually(index);
       }
       if (hand.value > 21) {
         hand.done = true;
+        MarkHandDivDoneVisually(index);
       }
+      index++;
     });
   } else {
     if (gameState.dealerHand.value >= 17) {

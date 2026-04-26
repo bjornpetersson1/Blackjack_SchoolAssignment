@@ -89,11 +89,13 @@
             />
             <span class="player-label">DEALER</span>
           </div>
-          <div class="cards-panel">
-            <div id="dealerCards" class="cards-area"></div>
-          </div>
-          <div class="score-row">
-            SCORE: <span id="dealerScore" class="score-value">--</span>
+          <div id="dealer-hand" class="hand-div">
+            <div class="cards-panel">
+              <div id="dealerCards" class="cards-area"></div>
+            </div>
+            <div class="score-row">
+              SCORE: <span id="dealerScore" class="score-value">--</span>
+            </div>
           </div>
         </div>
 
@@ -128,7 +130,7 @@
               class="profile-gif"
               alt="Player"
             />
-            <span class="player-label">PLAYER</span>
+            <span id="player-name" class="player-label">PLAYER</span>
           </div>
           <div id="hands-div"></div>
         </div>

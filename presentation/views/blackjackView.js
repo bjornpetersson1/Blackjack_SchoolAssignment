@@ -59,7 +59,9 @@ export const InitBlackjackView = () => {
 
   document.addEventListener("handValueChanged", (e) => {
     if (e.detail.receiver === "player") {
-      const scoreEl = document.querySelector(`#playerScore-${e.detail.handIndex}`);
+      const scoreEl = document.querySelector(
+        `#playerScore-${e.detail.handIndex}`,
+      );
       if (scoreEl) scoreEl.textContent = e.detail.value;
     } else {
       const cards = gameState.dealerHand.cards;
