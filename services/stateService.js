@@ -37,27 +37,25 @@ export const NoSplitPayoutLogic = (results) => {
 };
 
 export const SplitRulePayoutLogic = (results) => {
-  //  if (results[0] === 0) {
-  //       gameState.betState = 0;
-  //     } else if (results[0] === 1) {
-  //       gameState.userState.balance += gameState.betState;
-  //     } else if (results[0] === 2) {
-  //       gameState.userState.balance += gameState.betState * 2;
-  //     } else if (results[0] === 3) {
-  //       gameState.userState.balance += gameState.betState * 2.5;
-  //     }
-};
-
-export const DoubleDownRulePayoutLogic = (results) => {
-  //  if (results[0] === 0) {
-  //       gameState.betState = 0;
-  //     } else if (results[0] === 1) {
-  //       gameState.userState.balance += gameState.betState;
-  //     } else if (results[0] === 2) {
-  //       gameState.userState.balance += gameState.betState * 2;
-  //     } else if (results[0] === 3) {
-  //       gameState.userState.balance += gameState.betState * 2.5;
-  //     }
+  // 0 == lost, 1 == push, 2 == win, 3 == bj
+  const perHandBet = gameState.betState / results.length;
+  let totalWinloss = 0;
+  results.forEach((result) => {
+    if (result === 0) {
+      //loss already counted when starting hand
+    } else if (result === 1) {
+      totalWinloss += perHandBet;
+    } else if (result === 2) {
+      totalWinloss += perHandBet * 2;
+    } else if (result === 3) {
+      totalWinloss += perHandBet * 2.5;
+    }
+  });
+  if (totalWinloss > 0) {
+    gameState.userState.balance += totalWinloss;
+    NotifyBalanceChanged();
+  }
+  return totalWinloss;
 };
 
 export const SaveGameState = (activeGameState) => {

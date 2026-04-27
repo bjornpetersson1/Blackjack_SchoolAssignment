@@ -5,7 +5,7 @@ import {
   HideMessageScreen,
 } from "../presentation/components/infoRender.js";
 import { HandleIsPlayerDone, HandleStay } from "./gameService.js";
-import { NotifyHandChanged } from "./valueService.js";
+import { NotifyBalanceChanged, NotifyHandChanged } from "./valueService.js";
 import { CreateHandDiv } from "../presentation/components/splitRender.js";
 import { MarkHandDivDoneVisually } from "./flowService.js";
 
@@ -18,7 +18,11 @@ export const CheckIfExtraRuleApplies = () => {
     ShowMessageScreen("Double down?", "choice");
     document.querySelector("#choiceYesButton").onclick = () => {
       HideMessageScreen();
-      DoubleDownLogic();
+      if (gameState.betState > gameState.userState.balance) {
+        ShowMessageScreen("Not enough funds, no double down for you", "info");
+      } else {
+        DoubleDownLogic();
+      }
     };
   }
   const splitIndex = gameState.playerHands.findIndex(
@@ -31,8 +35,12 @@ export const CheckIfExtraRuleApplies = () => {
     ShowMessageScreen("Split hand?", "choice");
     document.querySelector("#choiceYesButton").onclick = () => {
       HideMessageScreen();
-      gameState.isSplitActive = true;
-      SplitLogic(splitIndex);
+      if (gameState.betState > gameState.userState.balance) {
+        ShowMessageScreen("Not enough funds, no split for you", "info");
+      } else {
+        gameState.isSplitActive = true;
+        SplitLogic(splitIndex);
+      }
     };
   }
 };
@@ -41,6 +49,7 @@ const DoubleDownLogic = () => {
   const bet = gameState.betState;
   gameState.betState += bet;
   gameState.userState.balance -= bet;
+  NotifyBalanceChanged();
   NewCardDrawRenderComp("player", 0);
   NotifyHandChanged("player", 0);
   gameState.playerHands[0].done = true;
@@ -49,6 +58,10 @@ const DoubleDownLogic = () => {
 };
 
 const SplitLogic = (index) => {
+  const bet = gameState.betState / gameState.playerHands.length;
+  gameState.betState += bet;
+  gameState.userState.balance -= bet;
+  NotifyBalanceChanged();
   const handsCount = gameState.playerHands.length;
   gameState.playerHands.push({ cards: [], value: 0, done: false });
 

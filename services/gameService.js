@@ -2,7 +2,6 @@ import { generateDeck } from "../data/deckData.js";
 import { ShuffleDeck, DrawOneCard, CardToImage } from "./deckService.js";
 import { gameState } from "../data/stateData.js";
 import {
-  DoubleDownRulePayoutLogic,
   NoSplitPayoutLogic,
   SplitRulePayoutLogic,
   UpdateHandValue,
@@ -17,7 +16,7 @@ import {
 } from "./valueService.js";
 import { NewCardDrawRenderComp } from "../presentation/components/cardRender.js";
 import { ShowMessageScreen } from "../presentation/components/infoRender.js";
-import { GenerateResultMessage } from "./infoService.js";
+import { GenerateResultMessage, GenerateSplitMessage } from "./infoService.js";
 
 export const InitNewHand = async () => {
   const bet = Number(document.querySelector("#betInput").value);
@@ -71,12 +70,11 @@ const HandleOutcome = () => {
   let winloss;
   if (gameState.isSplitActive) {
     winloss = SplitRulePayoutLogic(results);
-    // showInfoScreen(GenerateResultMessage(results, winloss)); //DU MÅSTE LÖSA DEN HÄR HUVUDVÄRKEN
+    ShowMessageScreen(GenerateSplitMessage(results, winloss), "info");
   } else {
     winloss = NoSplitPayoutLogic(results);
+    ShowMessageScreen(GenerateResultMessage(results[0], winloss), "info");
   }
-  ShowMessageScreen(GenerateResultMessage(results[0], winloss), "info");
-  //here i do something after updating gamestate
 };
 
 export const HandleIsDealerDone = () => {
