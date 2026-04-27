@@ -45,16 +45,16 @@ export const InitNewHand = async () => {
   document.querySelector("#dealerCards").replaceChildren();
 };
 
-export const ProcessCardDraw = (receiver, handIndex) => {
+export const ProcessCardDraw = async (receiver, handIndex) => {
   UpdateHandValue(receiver, handIndex);
   HandleValue(receiver);
   NotifyHandChanged(receiver, handIndex);
   if (receiver === "player") {
-    HandleIsPlayerDone();
+    await HandleIsPlayerDone();
   }
 };
 
-export const HandleIsPlayerDone = () => {
+export const HandleIsPlayerDone = async () => {
   if (gameState.playerHands.every((hand) => hand.done === true)) {
     const card = gameState.dealerHand.cards[0];
     document
@@ -63,16 +63,18 @@ export const HandleIsPlayerDone = () => {
     gameState.dealerHand.holeCardRevealed = true;
     NotifyHandChanged("dealer", 0);
     while (!gameState.dealerHand.done) {
-      NewCardDrawRenderComp("dealer", 0);
+      await NewCardDrawRenderComp("dealer", 0);
     }
-    HandleIsDealerDone();
+    await HandleIsDealerDone();
   }
 };
 
-const HandleOutcome = () => {
+const HandleOutcome = async () => {
   // 0 == lost, 1 == push, 2 == win, 3 == bj;
   const results = gameState.playerHands.map((hand) => CalculateResult(hand));
   let winloss;
+  DeactivateGameButtons();
+  await Delay(1500);
   if (gameState.isSplitActive) {
     winloss = SplitRulePayoutLogic(results);
     ShowMessageScreen(GenerateSplitMessage(results, winloss), "info");
@@ -80,21 +82,20 @@ const HandleOutcome = () => {
     winloss = NoSplitPayoutLogic(results);
     ShowMessageScreen(GenerateResultMessage(results[0], winloss), "info");
   }
-  DeactivateGameButtons();
   ActivateMenuButtons();
 };
 
-export const HandleIsDealerDone = () => {
+export const HandleIsDealerDone = async () => {
   if (gameState.dealerHand.done) {
-    HandleOutcome();
+    await HandleOutcome();
   }
 };
 
-export const HandleStay = (handIndex) => {
+export const HandleStay = async (handIndex) => {
   gameState.playerHands[handIndex].done = true;
   MarkHandDivDoneVisually(handIndex);
   DeactivateHandButtons(handIndex);
-  HandleIsPlayerDone();
+  await HandleIsPlayerDone();
   SaveGameState(gameState);
 };
 

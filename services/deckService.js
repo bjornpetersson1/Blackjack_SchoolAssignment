@@ -29,13 +29,13 @@ export const CalculateCurrentHand = (hand) => {
   return total;
 };
 
-export const DrawOneCard = (receiver, handIndex) => {
+export const DrawOneCard = async (receiver, handIndex) => {
   if (receiver === "player") {
     gameState.playerHands[handIndex].cards.push(gameState.deckState.pop());
   } else {
     gameState.dealerHand.cards.push(gameState.deckState.pop());
   }
-  ProcessCardDraw(receiver, handIndex);
+  await ProcessCardDraw(receiver, handIndex);
 };
 
 export const CardToImage = (card) => {

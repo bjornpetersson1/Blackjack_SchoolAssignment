@@ -16,12 +16,12 @@ export const CheckIfExtraRuleApplies = () => {
     gameState.playerHands[0].cards.length == 2
   ) {
     ShowMessageScreen("Double down?", "choice");
-    document.querySelector("#choiceYesButton").onclick = () => {
+    document.querySelector("#choiceYesButton").onclick = async () => {
       HideMessageScreen();
       if (gameState.betState > gameState.userState.balance) {
         ShowMessageScreen("Not enough funds, no double down for you", "info");
       } else {
-        DoubleDownLogic();
+        await DoubleDownLogic();
       }
     };
   }
@@ -33,31 +33,32 @@ export const CheckIfExtraRuleApplies = () => {
   );
   if (splitIndex != -1) {
     ShowMessageScreen("Split hand?", "choice");
-    document.querySelector("#choiceYesButton").onclick = () => {
+    document.querySelector("#choiceYesButton").onclick = async () => {
       HideMessageScreen();
       if (gameState.betState > gameState.userState.balance) {
         ShowMessageScreen("Not enough funds, no split for you", "info");
       } else {
         gameState.isSplitActive = true;
-        SplitLogic(splitIndex);
+        await SplitLogic(splitIndex);
       }
     };
   }
 };
 
-const DoubleDownLogic = () => {
+const DoubleDownLogic = async () => {
   const bet = gameState.betState;
   gameState.betState += bet;
   gameState.userState.balance -= bet;
   NotifyBalanceChanged();
-  NewCardDrawRenderComp("player", 0);
-  NotifyHandChanged("player", 0);
-  gameState.playerHands[0].done = true;
-  MarkHandDivDoneVisually(0);
-  HandleIsPlayerDone();
+  await NewCardDrawRenderComp("player", 0);
+  if (!gameState.playerHands[0].done) {
+    gameState.playerHands[0].done = true;
+    MarkHandDivDoneVisually(0);
+    await HandleIsPlayerDone();
+  }
 };
 
-const SplitLogic = (index) => {
+const SplitLogic = async (index) => {
   const bet = gameState.betState / gameState.playerHands.length;
   gameState.betState += bet;
   gameState.userState.balance -= bet;
@@ -76,6 +77,6 @@ const SplitLogic = (index) => {
   const targetArea = document.querySelector(`#playerHands-${handsCount}`);
   targetArea.appendChild(sourceArea.lastChild);
 
-  NewCardDrawRenderComp("player", index);
-  NewCardDrawRenderComp("player", handsCount);
+  await NewCardDrawRenderComp("player", index);
+  await NewCardDrawRenderComp("player", handsCount);
 };

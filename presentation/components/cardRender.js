@@ -9,26 +9,23 @@ import { CreateHandDiv } from "./splitRender.js";
 export const NewHandRenderComp = async () => {
   InitNewHand();
   CreateHandDiv(0, NewCardDrawRenderComp, HandleStay);
-  await Delay(500);
-  NewCardDrawRenderComp("player", 0);
-  await Delay(500);
-  NewCardDrawRenderComp("dealer", 0);
-  await Delay(500);
-  NewCardDrawRenderComp("player", 0);
-  await Delay(500);
-  NewCardDrawRenderComp("dealer", 0);
+  await NewCardDrawRenderComp("player", 0);
+  await NewCardDrawRenderComp("dealer", 0);
+  await NewCardDrawRenderComp("player", 0);
+  await NewCardDrawRenderComp("dealer", 0);
 };
 
-export const NewCardDrawRenderComp = (receiver, handIndex) => {
+export const NewCardDrawRenderComp = async (receiver, handIndex) => {
+  await Delay(500);
   if (receiver === "player") {
-    DrawOneCard(receiver, handIndex);
+    await DrawOneCard(receiver, handIndex);
     const cards = gameState.playerHands[handIndex].cards;
     document
       .querySelector(`#playerHands-${handIndex}`)
       .appendChild(CardToImage(cards[cards.length - 1]));
     CheckIfExtraRuleApplies();
   } else {
-    DrawOneCard(receiver, 0);
+    await DrawOneCard(receiver, 0);
     const cards = gameState.dealerHand.cards;
     const card =
       cards.length === 1

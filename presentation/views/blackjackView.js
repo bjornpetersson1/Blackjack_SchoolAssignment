@@ -10,7 +10,7 @@ import {
   CheckIfValueIsLessOrEqual,
   NotifyBalanceChanged,
 } from "../../services/valueService.js";
-import { SetCurrentView } from "../../services/viewService.js";
+import { ClearView, SetCurrentView } from "../../services/viewService.js";
 import { NewHandRenderComp } from "../components/cardRender.js";
 import { ShowMessageScreen } from "../components/infoRender.js";
 
@@ -51,6 +51,7 @@ export const InitBlackjackView = () => {
     });
 
   document.querySelector("#logout-button").addEventListener("click", () => {
+    ClearView();
     SetCurrentView("login-div");
   });
 
