@@ -5,6 +5,7 @@ import {
   DeactivateGameButtons,
   DeactivateMenuButtons,
 } from "../../services/buttonService.js";
+import { PlaySound, StopBackgroundMusic, SetVolume } from "../../services/soundService.js";
 import { SaveGameState } from "../../services/stateService.js";
 import {
   CheckIfValueIsLessOrEqual,
@@ -35,6 +36,7 @@ export const InitBlackjackView = () => {
 
   document.querySelector("#dealNewHandButton").addEventListener("click", () => {
     if (CheckIfValueIsLessOrEqual(Number(betInput.value))) {
+      StopBackgroundMusic();
       DeactivateMenuButtons();
       NewHandRenderComp();
       SaveGameState(gameState);
@@ -52,10 +54,15 @@ export const InitBlackjackView = () => {
 
   document.querySelector("#logout-button").addEventListener("click", () => {
     ClearView();
+    StopBackgroundMusic();
     SetCurrentView("login-div");
   });
 
   //---------------EVENTS------------
+
+  document.querySelector("#volumeSlider").addEventListener("input", (e) => {
+    SetVolume(Number(e.target.value) / 100);
+  });
 
   betInput.addEventListener("change", () => {
     betInput.value = clampBet(Number(betInput.value));

@@ -1,4 +1,3 @@
-import { ProcessCardDraw } from "./gameService.js";
 import { gameState } from "../data/stateData.js";
 
 export const ShuffleDeck = (deck) => {
@@ -29,13 +28,12 @@ export const CalculateCurrentHand = (hand) => {
   return total;
 };
 
-export const DrawOneCard = async (receiver, handIndex) => {
+export const DrawOneCard = (receiver, handIndex) => {
   if (receiver === "player") {
     gameState.playerHands[handIndex].cards.push(gameState.deckState.pop());
   } else {
     gameState.dealerHand.cards.push(gameState.deckState.pop());
   }
-  await ProcessCardDraw(receiver, handIndex);
 };
 
 export const CardToImage = (card) => {

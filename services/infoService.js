@@ -30,7 +30,7 @@ export const GenerateSplitMessage = (results, winloss) => {
   if (winloss === 0) {
     message += ` and you lost a total of ${gameState.betState} kr`;
   } else {
-    message += ` and you won a total of ${winloss} kr`;
+    message += ` and your payout was a total of ${winloss} kr`;
   }
   return message;
 };

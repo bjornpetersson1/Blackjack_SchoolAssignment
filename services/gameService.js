@@ -22,6 +22,7 @@ import {
   DeactivateGameButtons,
   DeactivateHandButtons,
 } from "./buttonService.js";
+import { PlayBackgroundMusic } from "./soundService.js";
 
 export const InitNewHand = async () => {
   const bet = Number(document.querySelector("#betInput").value);
@@ -74,7 +75,8 @@ const HandleOutcome = async () => {
   const results = gameState.playerHands.map((hand) => CalculateResult(hand));
   let winloss;
   DeactivateGameButtons();
-  await Delay(1500);
+  PlayBackgroundMusic();
+  await Delay(4500);
   if (gameState.isSplitActive) {
     winloss = SplitRulePayoutLogic(results);
     ShowMessageScreen(GenerateSplitMessage(results, winloss), "info");
