@@ -17,6 +17,11 @@ import {
 import { NewCardDrawRenderComp } from "../presentation/components/cardRender.js";
 import { ShowMessageScreen } from "../presentation/components/infoRender.js";
 import { GenerateResultMessage, GenerateSplitMessage } from "./infoService.js";
+import {
+  ActivateMenuButtons,
+  DeactivateGameButtons,
+  DeactivateHandButtons,
+} from "./buttonService.js";
 
 export const InitNewHand = async () => {
   const bet = Number(document.querySelector("#betInput").value);
@@ -75,6 +80,8 @@ const HandleOutcome = () => {
     winloss = NoSplitPayoutLogic(results);
     ShowMessageScreen(GenerateResultMessage(results[0], winloss), "info");
   }
+  DeactivateGameButtons();
+  ActivateMenuButtons();
 };
 
 export const HandleIsDealerDone = () => {
@@ -86,6 +93,7 @@ export const HandleIsDealerDone = () => {
 export const HandleStay = (handIndex) => {
   gameState.playerHands[handIndex].done = true;
   MarkHandDivDoneVisually(handIndex);
+  DeactivateHandButtons(handIndex);
   HandleIsPlayerDone();
   SaveGameState(gameState);
 };

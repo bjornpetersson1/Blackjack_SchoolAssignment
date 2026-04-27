@@ -1,4 +1,10 @@
 import { gameState } from "../../data/stateData.js";
+import {
+  ActivateGameButtons,
+  ActivateMenuButtons,
+  DeactivateGameButtons,
+  DeactivateMenuButtons,
+} from "../../services/buttonService.js";
 import { SaveGameState } from "../../services/stateService.js";
 import {
   CheckIfValueIsLessOrEqual,
@@ -16,6 +22,7 @@ const clampBet = (value) => Math.min(betMax, Math.max(betMin, value));
 
 export const InitBlackjackView = () => {
   const betInput = document.querySelector("#betInput");
+  ActivateMenuButtons();
 
   //-----------Buttons--------------
   document.querySelector("#betIncreaseButton").addEventListener("click", () => {
@@ -28,8 +35,10 @@ export const InitBlackjackView = () => {
 
   document.querySelector("#dealNewHandButton").addEventListener("click", () => {
     if (CheckIfValueIsLessOrEqual(Number(betInput.value))) {
+      DeactivateMenuButtons();
       NewHandRenderComp();
       SaveGameState(gameState);
+      ActivateGameButtons();
     } else {
       ShowMessageScreen("Insufficent funds", "info");
     }

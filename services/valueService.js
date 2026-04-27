@@ -1,4 +1,5 @@
 import { gameState } from "../data/stateData.js";
+import { DeactivateHandButtons } from "./buttonService.js";
 import { MarkHandDivDoneVisually } from "./flowService.js";
 
 export const HandleValue = (owner) => {
@@ -8,10 +9,12 @@ export const HandleValue = (owner) => {
       if (hand.value == 21) {
         hand.done = true;
         MarkHandDivDoneVisually(index);
+        DeactivateHandButtons(index);
       }
       if (hand.value > 21) {
         hand.done = true;
         MarkHandDivDoneVisually(index);
+        DeactivateHandButtons(index);
       }
       index++;
     });

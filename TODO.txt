@@ -1,3 +1,2 @@
-inaktivera knappar man inte får använda
 Flow
 Ljud
