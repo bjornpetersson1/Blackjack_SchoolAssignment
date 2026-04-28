@@ -25,8 +25,8 @@ export const NewCardDrawRenderComp = async (receiver, handIndex) => {
     document
       .querySelector(`#playerHands-${handIndex}`)
       .appendChild(CardToImage(cards[cards.length - 1]));
-    CheckIfExtraRuleApplies();
     await ProcessCardDraw(receiver, handIndex);
+    CheckIfExtraRuleApplies();
   } else {
     DrawOneCard(receiver, 0);
     const cards = gameState.dealerHand.cards;
