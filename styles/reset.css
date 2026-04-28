@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #c8c4bc;
+  --surface: #d4d0c8;
+  --surface2: #dedad2;
+  --panel: #2a2620;
+  --border: #9a9690;
+  --groove: #b0aca5;
+  --accent: #e05500;
+  --accent2: #b06000;
+  --led: #44ff55;
+  --text: #1a1612;
+  --muted: #6a6460;
+  --score: #e05500;
+  --font: "Courier New", Courier, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  min-height: 100vh;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.008) 3px,
+    rgba(255, 255, 255, 0.008) 4px
+  );
+}
+
+.view {
+  display: none;
+}

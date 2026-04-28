@@ -1,0 +1,102 @@
+.bet-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.bet-btn {
+  flex-shrink: 0;
+  padding: 0.35rem 0.3rem;
+}
+
+#betInput {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--accent2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top-color: #111;
+  padding: 0.45rem 1rem;
+  width: 100%;
+  text-align: center;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#betInput::placeholder {
+  color: var(--muted);
+}
+
+#betInput:focus {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 4px rgba(255, 106, 0, 0.3);
+}
+
+#betInput::-webkit-outer-spin-button,
+#betInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.balance-label {
+  font-size: 1.4rem;
+  color: var(--accent2);
+}
+
+.balance-display {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--led);
+  background: #08100a;
+  border: 1px solid #162016;
+  border-top-color: #060c06;
+  padding: 0.45rem 1rem;
+  width: 100%;
+  text-align: center;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.9);
+  text-shadow:
+    0 0 8px rgba(68, 255, 85, 0.9),
+    0 0 3px rgba(68, 255, 85, 0.6);
+}
+
+#volumeSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 1px solid #b03a00;
+  box-shadow:
+    0 0 6px rgba(255, 106, 0, 0.6),
+    inset 0 1px 0 rgba(255, 180, 80, 0.3);
+  cursor: pointer;
+}
+
+#volumeSlider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 1px solid #b03a00;
+  box-shadow:
+    0 0 6px rgba(255, 106, 0, 0.6),
+    inset 0 1px 0 rgba(255, 180, 80, 0.3);
+  cursor: pointer;
+}

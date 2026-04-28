@@ -1,0 +1,99 @@
+.deposit-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: calc(100vh - 48px);
+  background: var(--bg);
+}
+
+.deposit-gif {
+  width: 120px;
+  height: 120px;
+}
+
+.deposit-input {
+  font-family: var(--font);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top-color: #111;
+  padding: 0.45rem 1rem;
+  width: 200px;
+  text-align: center;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.deposit-input::placeholder {
+  color: var(--muted);
+}
+
+.deposit-input:focus {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.deposit-input::-webkit-outer-spin-button,
+.deposit-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.deposit-calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+  width: 220px;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+}
+
+.calc-btn {
+  padding: 0.65rem 0;
+  text-align: center;
+  width: 100%;
+  letter-spacing: 0;
+}
+
+.calc-op {
+  color: var(--accent2);
+  border-color: #555;
+}
+
+.calc-op:hover {
+  color: var(--accent2);
+  border-color: var(--accent2);
+}
+
+.calc-op[data-key="C"] {
+  color: #ff4444;
+  border-color: #555;
+}
+
+.calc-op[data-key="C"]:hover {
+  border-color: #ff4444;
+}
+
+.calc-eq {
+  color: var(--accent);
+  border-color: #555;
+  background: linear-gradient(180deg, #3a2a1a 0%, #2a1e10 100%);
+}
+
+.calc-eq:hover {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, #4a3520 0%, #3a2a15 100%);
+}
+
+.deposit-action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}

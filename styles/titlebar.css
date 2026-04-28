@@ -1,0 +1,39 @@
+.game-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(180deg, #2e2e2e 0%, #1e1e1e 100%);
+  border-bottom: 3px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.05em;
+}
+
+.game-title {
+  font-size: 1.15rem;
+  color: var(--accent);
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(255, 106, 0, 0.6);
+  letter-spacing: 0.15em;
+}
+
+.game-subtitle {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1.1s step-start infinite;
+}

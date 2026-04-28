@@ -1,0 +1,67 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.5rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+#create-new-user-container {
+  background: var(--muted);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 180px;
+  background: linear-gradient(145deg, #2c2c2c 0%, #181818 60%, #242424 100%);
+  border: 2px solid #555;
+  border-bottom-color: #111;
+  border-right-color: #111;
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.8),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 0 18px rgba(255, 106, 0, 0.12),
+    0 4px 14px rgba(0, 0, 0, 0.7);
+  gap: 0.1rem;
+}
+
+.logo-text {
+  font-family: monospace;
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  line-height: 1.1;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 0 16px rgba(255, 106, 0, 0.5),
+    0 -1px 0 rgba(255, 150, 50, 0.15);
+}
+
+.input-div {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.input-div span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+#login-div {
+  width: 600px;
+  margin: 0 auto;
+}
+
+#create-new-user-div {
+  width: 600px;
+  margin: 0 auto;
+}
