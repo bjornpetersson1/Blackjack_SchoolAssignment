@@ -32,7 +32,10 @@ export const CheckIfExtraRuleApplies = () => {
       hand.cards[0].value === hand.cards[1].value,
   );
   if (splitIndex != -1) {
-    ShowMessageScreen("Split hand?", "choice");
+    ShowMessageScreen(
+      splitIndex == 0 ? "Split hand?" : `Split hand no ${splitIndex + 1}`,
+      "choice",
+    );
     document.querySelector("#choiceYesButton").onclick = async () => {
       HideMessageScreen();
       if (gameState.betState > gameState.userState.balance) {
